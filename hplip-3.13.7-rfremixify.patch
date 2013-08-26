@@ -1,0 +1,291 @@
+diff -urN hplip-3.13.7/base/password.py hplip-3.13.7.new/base/password.py
+--- hplip-3.13.7/base/password.py	2013-07-23 09:18:29.000000000 +0400
++++ hplip-3.13.7.new/base/password.py	2013-08-26 19:42:42.377050246 +0400
+@@ -35,6 +35,7 @@
+              'suse':'su',
+              'mandriva':'su',
+              'fedora':'su',
++             'rfremix':'su',
+              'redhat':'su',
+              'rhel':'su',
+              'slackware':'su',
+diff -urN hplip-3.13.7/installer/distros.dat hplip-3.13.7.new/installer/distros.dat
+--- hplip-3.13.7/installer/distros.dat	2013-07-23 09:13:36.000000000 +0400
++++ hplip-3.13.7.new/installer/distros.dat	2013-08-26 19:41:42.582049621 +0400
+@@ -92,7 +92,7 @@
+ # ****************************************
+ 
+ [distros]
+-distros=unknown,mepis,debian,suse,mandriva,fedora,redhat,rhel,slackware,gentoo,redflag,ubuntu,xandros,freebsd,linspire,ark,pclinuxos,centos,igos,linuxmint,linpus,gos,boss,lfs
++distros=unknown,mepis,debian,suse,mandriva,fedora,rfremix,redhat,rhel,slackware,gentoo,redflag,ubuntu,xandros,freebsd,linspire,ark,pclinuxos,centos,igos,linuxmint,linpus,gos,boss,lfs
+ 
+ # ****************************************
+ 
+@@ -823,6 +823,267 @@
+ code_name=Schrodinger's Cat
+ supported=1
+ packaged_version=3.13.5
++release_date=02/07/2013
++same_as_version=17
++
++# ****************************************
++[rfremix]
++index=5
++versions=17,18,19
++display_name=RFRemix
++alt_names=Russian Fedora Remix
++display=1
++notes=SELinux must run in permissive mode or it must be disabled for HPLIP to function properly. Please run SELinux in permissive mode or disable it before continuing.
++package_mgrs=yum,rpm,up2date
++package_mgr_cmd=su -c "yum -y -d 10 -e 1 install $packages_to_install"
++pre_depend_cmd=su -c "yum clean all",su -c "yum check-update"
++post_depend_cmd=
++hplip_remove_cmd=su -c "yum -y -d 10 -e 1 remove hplip"
++su_sudo=su
++ppd_install=ppd
++udev_mode_fix=1
++ppd_dir=/usr/share/cups/model/HP
++fix_ppd_symlink=0
++drv_dir=/usr/share/cups/drv/HP
++
++# ********************
++[rfremix:17]
++code_name=Beefy Miracle
++supported=1
++scan_supported=1
++fax_supported=1
++pcard_supported=1
++network_supported=1
++parallel_supported=1
++usb_supported=1
++packaged_version=3.12.4
++release_date=22/05/2012
++notes=To complete the install in RFRemix you must quit the installer at the printer setup stage, log out, log back in, and run hp-setup.
++ppd_install=drv
++udev_mode_fix=1
++ppd_dir=/usr/share/cups/model/HP
++fix_ppd_symlink=0
++drv_dir=/usr/share/cups/drv/HP
++ui_toolkit=qt4
++policykit=0
++native_cups=1
++add_user_to_group=-a -Gsys,lp
++open_mdns_port=/bin/bash ./init-iptables-firewall
++pre_depend_cmd=su -c "yum clean all",su -c "yum check-update"
++
++[rfremix:17:cups]
++packages=cups
++
++[rfremix:17:cups-devel]
++packages=cups-devel
++
++[rfremix:17:gcc]
++packages=gcc-c++
++
++[rfremix:17:gs]
++packages=ghostscript
++
++[rfremix:17:libcrypto]
++packages=openssl-devel
++
++[rfremix:17:libjpeg]
++packages=libjpeg-devel
++
++[rfremix:17:libnetsnmp-devel]
++packages=net-snmp-devel
++
++[rfremix:17:libpthread]
++packages=glibc-headers
++
++[rfremix:17:libtool]
++packages=libtool
++
++[rfremix:17:libusb]
++packages=libusb1-devel
++
++[rfremix:17:make]
++packages=make
++
++[rfremix:17:pil]
++packages=python-imaging
++
++[rfremix:17:ppdev]
++packages=
++commands=su -c "/sbin/modprobe ppdev"
++
++[rfremix:17:pyqt]
++packages=PyQt
++
++[rfremix:17:python-devel]
++packages=python-devel
++
++[rfremix:17:pyqt4]
++packages=PyQt4
++
++[rfremix:17:pyqt4-dbus]
++packages=dbus-python
++
++[rfremix:17:python23]
++packages=python
++
++[rfremix:17:python2x]
++packages=python
++
++[rfremix:17:reportlab]
++packages=python-reportlab
++
++[rfremix:17:sane]
++packages=sane-backends
++
++[rfremix:17:sane-devel]
++packages=sane-backends-devel
++
++[rfremix:17:scanimage]
++packages=sane-frontends
++
++[rfremix:17:xsane]
++packages=xsane
++
++[rfremix:17:python-dbus]
++packages=dbus-python,pygobject2
++
++[rfremix:17:dbus]
++packages=dbus-devel
++
++[rfremix:17:cups-image]
++packages=cups-devel
++
++[rfremix:17:python-notify]
++packages=notify-python
++
++[rfremix:17:policykit]
++packages=polkit,polkit-gnome
++
++[rfremix:17:network]
++packages=wget
++
++# ********************
++[rfremix:18]
++code_name=Sperical Cow
++supported=1
++scan_supported=1
++fax_supported=1
++pcard_supported=1
++network_supported=1
++parallel_supported=1
++usb_supported=1
++packaged_version=3.12.10a
++release_date=08/01/2013
++notes=To complete the install in RFRemix you must quit the installer at the printer setup stage, log out, log back in, and run hp-setup.
++ppd_install=drv
++udev_mode_fix=1
++ppd_dir=/usr/share/cups/model/HP
++fix_ppd_symlink=0
++drv_dir=/usr/share/cups/drv/HP
++ui_toolkit=qt4
++policykit=0
++native_cups=1
++add_user_to_group=-a -Gsys,lp
++open_mdns_port=/bin/bash ./init-iptables-firewall
++pre_depend_cmd=su -c "yum clean all",su -c "yum check-update"
++
++[rfremix:18:cups]
++packages=cups
++
++[rfremix:18:cups-devel]
++packages=cups-devel
++
++[rfremix:18:gcc]
++packages=audit,gcc-c++
++
++[rfremix:18:gs]
++packages=ghostscript
++
++[rfremix:18:libcrypto]
++packages=openssl-devel
++
++[rfremix:18:libjpeg]
++packages=libjpeg-devel
++
++[rfremix:18:libnetsnmp-devel]
++packages=net-snmp-devel
++
++[rfremix:18:libpthread]
++packages=glibc-headers
++
++[rfremix:18:libtool]
++packages=libtool
++
++[rfremix:18:libusb]
++packages=libusb1-devel
++
++[rfremix:18:make]
++packages=make
++
++[rfremix:18:pil]
++packages=python-imaging
++
++[rfremix:18:ppdev]
++packages=
++commands=su -c "/sbin/modprobe ppdev"
++
++[rfremix:18:pyqt]
++packages=PyQt
++
++[rfremix:18:python-devel]
++packages=python-devel
++
++[rfremix:18:pyqt4]
++packages=PyQt4
++
++[rfremix:18:pyqt4-dbus]
++packages=dbus-python
++
++[rfremix:18:python23]
++packages=python
++
++[rfremix:18:python2x]
++packages=python
++
++[rfremix:18:reportlab]
++packages=python-reportlab
++
++[rfremix:18:sane]
++packages=sane-backends
++
++[rfremix:18:sane-devel]
++packages=sane-backends-devel
++
++[rfremix:18:scanimage]
++packages=sane-frontends
++
++[rfremix:18:xsane]
++packages=xsane
++
++[rfremix:18:python-dbus]
++packages=dbus-python,pygobject2
++
++[rfremix:18:dbus]
++packages=dbus-devel
++
++[rfremix:18:cups-image]
++packages=cups-devel
++
++[rfremix:18:python-notify]
++packages=notify-python
++
++[rfremix:18:policykit]
++packages=polkit,polkit-gnome
++
++[rfremix:18:network]
++packages=wget
++
++# ****************************************
++
++[rfremix:19]
++code_name=Schrodinger's Cat
++supported=1
++packaged_version=3.13.5
+ release_date=02/07/2013
+ same_as_version=17
+ 
